@@ -1,8 +1,15 @@
 import boto3
-access_key='AKIAWYIBM2R4FUNNLREB'
-secret_access_key='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'
-region ='eu-west-1' 
-bucket_name='bibipayminute'  
+from configparser import ConfigParser 
+from utils.helper import create_bucket 
+
+config=ConfigParser()
+config.read('.env')
+
+access_key=config['AWS']['access_key']
+secret_access_key=config['AWS']['secret_access_key']
+region =config['AWS']['region']
+bucket_name=config['AWS']['bucket_name']
+
 
 def create_bucket():
     client = boto3.client(
